@@ -17,10 +17,12 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
 
     Context context;
     ArrayList<TitleModel> titleModelArrayList;
+    OnItemClickListener onItemClickListener;
 
-    TitleAdapter(Context context, ArrayList<TitleModel> titleModelArrayList){
+    public TitleAdapter(Context context, ArrayList<TitleModel> titleModelArrayList, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.titleModelArrayList = titleModelArrayList;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -53,11 +55,10 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
             titleName = itemView.findViewById(R.id.titleName);
             pick = itemView.findViewById(R.id.pick);
 
-            pick.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Toast.makeText(context, "Button "+getAdapterPosition()+" is clicked.", Toast.LENGTH_SHORT).show();
-
+                    onItemClickListener.onItemClick(getAdapterPosition());
                 }
             });
 

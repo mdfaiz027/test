@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements OnItemClickListener{
 
     ArrayList<TitleModel> titleModelArrayList = new ArrayList<>();
     RecyclerView recyclerView;
@@ -75,9 +75,13 @@ public class MainActivity extends AppCompatActivity{
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TitleAdapter(this, titleModelArrayList);
+        adapter = new TitleAdapter(this, titleModelArrayList, this::onItemClick);
         recyclerView.setAdapter(adapter);
         //done here
     }
 
+    @Override
+    public void onItemClick(int position) {
+        //Toast.makeText(this, "Button " + position + " clicked", Toast.LENGTH_SHORT).show();
+    }
 }
