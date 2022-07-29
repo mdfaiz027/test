@@ -1,9 +1,10 @@
 package com.example.test;
 
-public class ImageModel {
+public class ChildModelClass {
+
     int image;
 
-    public ImageModel(int image) {
+    public ChildModelClass(int image) {
         this.image = image;
     }
 

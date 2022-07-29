@@ -11,10 +11,12 @@
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1755" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.28072916666666664" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2177276611328125" />
+        <entry key="app/src/main/res/layout/child_rv_layout.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/custom_dialog_layout.xml" value="0.29025641025641025" />
         <entry key="app/src/main/res/layout/custom_single_image.xml" value="0.27589743589743587" />
         <entry key="app/src/main/res/layout/layoutforthetitle.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/parent_rv_layout.xml" value="0.2947916666666667" />
       </map>
     </option>
   </component>

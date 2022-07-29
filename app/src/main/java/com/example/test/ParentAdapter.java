@@ -6,22 +6,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.List;
 
-public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> {
+public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<TitleModel> titleModelArrayList;
+    List<ParentModelClass> parentModelClassArrayList;
     OnItemClickListener onItemClickListener;
 
-    public TitleAdapter(Context context, ArrayList<TitleModel> titleModelArrayList, OnItemClickListener onItemClickListener) {
+    public ParentAdapter(Context context, ArrayList<ParentModelClass> parentModelClassArrayList, OnItemClickListener onItemClickListener) {
         this.context = context;
-        this.titleModelArrayList = titleModelArrayList;
+        this.parentModelClassArrayList = parentModelClassArrayList;
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -29,31 +30,43 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.layoutforthetitle, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.parent_rv_layout, null, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.titleName.setText(titleModelArrayList.get(position).title);
+        holder.titleName.setText(parentModelClassArrayList.get(position).title);
+
+        ChildAdapter childAdapter;
+        childAdapter = new ChildAdapter(context,parentModelClassArrayList.get(position).childModelClassList);
+        holder.secondRV.setLayoutManager(new GridLayoutManager(context, 4));
+        holder.secondRV.setAdapter(childAdapter);
+    }
+
+    @Override
+    public int getItemViewType(int position){
+        return position;
     }
 
     @Override
     public int getItemCount() {
-        return titleModelArrayList.size();
+        return parentModelClassArrayList.size();
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView titleName;
-        ImageView pick;
+        ImageView pickImage;
+        RecyclerView secondRV;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             titleName = itemView.findViewById(R.id.titleName);
-            pick = itemView.findViewById(R.id.pick);
+            pickImage = itemView.findViewById(R.id.pick);
+            secondRV = itemView.findViewById(R.id.idSecondRV);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
