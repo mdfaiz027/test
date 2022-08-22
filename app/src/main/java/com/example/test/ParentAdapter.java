@@ -63,7 +63,7 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
             pickImage = itemView.findViewById(R.id.pick);
             secondRV = itemView.findViewById(R.id.idSecondRV);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            pickImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     onItemClickListener.onItemClick(getAdapterPosition());
