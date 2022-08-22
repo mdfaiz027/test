@@ -11,23 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:divider="@color/white"
-        android:dividerHeight="10dp"
         android:scrollbarStyle="outsideInset"
         android:scrollbars="vertical"
-        tools:listitem="@layout/parent_rv_layout" />
+        tools:listitem="@layout/parent_rv_layout"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnOpenDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="21dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
         android:src="@drawable/ic_baseline_add_24"
         app:tint="#fff" />
 
