@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/border"
-    android:layout_margin="20dp">
+    android:layout_margin="10dp"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,12 +15,14 @@
         android:orientation="horizontal"
         android:layout_margin="10dp"
         android:weightSum="2"
+        android:gravity="center"
         android:background="@drawable/border2">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
 
         <TextView
             android:id="@+id/titleName"
@@ -28,18 +31,23 @@
             android:layout_weight="1"
             android:text="Title"
             android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/gray"/>
+            android:textSize="18sp"
+            android:textColor="@color/gray"
+            android:padding="2dp"/>
 
         </LinearLayout>
 
-        <LinearLayout
+        <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="0.01"
+            android:background="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="1.5dp"
-            android:background="@drawable/one_side_border">
+            android:layout_margin="1.5dp">
 
             <ImageView
                 android:id="@+id/pick"
@@ -50,6 +58,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginEnd="10dp"
                 android:layout_gravity="center"/>
 
         </LinearLayout>
@@ -62,6 +71,7 @@
         android:layout_height="match_parent"
         android:scrollbarStyle="outsideInset"
         android:scrollbars="vertical"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        tools:listitem="@layout/child_rv_layout"/>
 
 </LinearLayout>

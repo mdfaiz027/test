@@ -9,12 +9,15 @@
         <entry key="app/src/main/res/drawable/button_border.xml" value="0.1625" />
         <entry key="app/src/main/res/drawable/custom_layout_border.xml" value="0.1625" />
         <entry key="app/src/main/res/drawable/customborder.xml" value="0.187" />
+        <entry key="app/src/main/res/drawable/divider.xml" value="0.171" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/one_side_border.xml" value="0.171" />
+        <entry key="app/src/main/res/drawable/one_side_border2.xml" value="0.1615" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2177276611328125" />
-        <entry key="app/src/main/res/layout/child_rv_layout.xml" value="0.2947916666666667" />
+        <entry key="app/src/main/res/layout/child_rv_layout.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/custom.xml" value="0.2921875" />
         <entry key="app/src/main/res/layout/custom_dialog_layout.xml" value="0.29025641025641025" />
         <entry key="app/src/main/res/layout/custom_single_image.xml" value="0.27589743589743587" />
         <entry key="app/src/main/res/layout/layoutforthetitle.xml" value="0.25" />

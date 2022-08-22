@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,12 +29,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     RecyclerView recyclerView;
     ArrayList<ParentModelClass> parentModelClassArrayList;
-    ArrayList<Uri> childModelClassList;
+    ArrayList<ArrayList<Uri>> childModelClassList;
     ParentAdapter parentAdapter;
-    ChildAdapter childAdapter;
     FloatingActionButton btnOpenDialog;
 
-    private  static  final int Read_Permission = 101;
+    private static final int Read_Permission = 101;
+    private static int lastClickedPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,15 +69,19 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
                         if(!edtTitle.getText().toString().equals("")){
                             title = edtTitle.getText().toString();
+                            dialog.dismiss();
+
+                            ArrayList<Uri> uriListForParentModel = new ArrayList<>();
+                            childModelClassList.add(uriListForParentModel);
+
+                            parentModelClassArrayList.add(new ParentModelClass(title,uriListForParentModel));
+                            parentAdapter.notifyItemInserted(parentModelClassArrayList.size()-1);
+                            recyclerView.scrollToPosition(parentModelClassArrayList.size()-1);
 
                         }else{
-                            Toast.makeText(MainActivity.this, "Please Enter the title", Toast.LENGTH_SHORT).show();
+                            edtTitle.setError("Please Enter the title");
+                            //Toast.makeText(MainActivity.this, "Please Enter the title", Toast.LENGTH_SHORT).show();
                         }
-
-                        parentModelClassArrayList.add(new ParentModelClass(title,childModelClassList));
-                        parentAdapter.notifyItemInserted(parentModelClassArrayList.size()-1);
-                        recyclerView.scrollToPosition(parentModelClassArrayList.size()-1);
-                        dialog.dismiss();
                     }
                 });
                 // cancel button
@@ -95,27 +100,23 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         parentAdapter = new ParentAdapter(this, parentModelClassArrayList, this::onItemClick);
         recyclerView.setAdapter(parentAdapter);
-        //done here
 
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Read_Permission);
         }
-
-        //recyclerAdapter = new RecyclerAdapter(uri);
-        //recyclerView1.setLayoutManager(new GridLayoutManager(MainActivity.this, 4));
-        //recyclerView1.setAdapter(recyclerAdapter);
     }
 
     @Override
     public void onItemClick(int position) {
         //Toast.makeText(this, "Button " + position + " clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2){
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-            }
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        lastClickedPosition = position;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2){
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        }
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
 
     }
 
@@ -128,14 +129,15 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 int x = data.getClipData().getItemCount();
 
                 for(int i=0;i<x;i++){
-                    childModelClassList.add(data.getClipData().getItemAt(i).getUri());
+                    childModelClassList.get(lastClickedPosition).add(data.getClipData().getItemAt(i).getUri());
                 }
-                parentAdapter.notifyDataSetChanged();
             }
             else if(data.getData() != null){
-                String imageURL = data.getData().getPath();
-                childModelClassList.add(Uri.parse(imageURL));
+                String imageURL = data.getData().toString();
+                childModelClassList.get(lastClickedPosition).add(Uri.parse(imageURL));
             }
+
+            parentAdapter.notifyDataSetChanged();
         }
     }
 }

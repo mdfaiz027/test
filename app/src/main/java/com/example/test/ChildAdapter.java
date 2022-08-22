@@ -35,11 +35,6 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder> 
     }
 
     @Override
-    public int getItemViewType(int position){
-        return position;
-    }
-
-    @Override
     public int getItemCount() {
         return childModelClassList.size();
     }
